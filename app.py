@@ -7,8 +7,33 @@ import plotly.graph_objects as go
 # Load the dataset
 df = pd.read_csv('vehicles_us.csv')
 
+
+
+# Clean missing values
+df['model_year'] = df['model_year'].fillna('N/A')
+df['cylinders'] = df['cylinders'].fillna('N/A')
+df['odometer'] = df['odometer'].fillna('N/A')
+df['paint_color'] = df['paint_color'].fillna('N/A')
+df['is_4wd'] = df['is_4wd'].fillna('N/A')
+
+df['model_year'] = df['model_year'].fillna('N/A')
+df['cylinders'] = df['cylinders'].fillna('N/A')
+df['odometer'] = pd.to_numeric(df['odometer'], errors='coerce').fillna(0)  # Ensure numeric type for odometer
+df['price'] = pd.to_numeric(df['price'], errors='coerce').fillna(0)  # Ensure numeric type for price
+df['paint_color'] = df['paint_color'].fillna('N/A')
+df['is_4wd'] = df['is_4wd'].fillna('N/A')
+
+
+
+df.info()
+df.head()
+
+
 # Convert 'date_posted' to datetime format (if necessary)
 df['date_posted'] = pd.to_datetime(df['date_posted'], errors='coerce')
+
+
+
 
 # Create the Streamlit app
 st.title("Vehicle Listings Analysis")
