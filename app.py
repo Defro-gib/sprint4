@@ -4,6 +4,11 @@ import pandas as pd
 import plotly.express as px
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
+import pyarrow as pa
+
+df_arrow = pa.Table.from_pandas(df)
+df_pandas = df_arrow.to_pandas()
+st.write(df_pandas)
 
 # Load the dataset
 df = pd.read_csv('vehicles_us.csv')
