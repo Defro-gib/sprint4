@@ -6,9 +6,7 @@ from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 import pyarrow as pa
 
-df_arrow = pa.Table.from_pandas(df)
-df_pandas = df_arrow.to_pandas()
-st.write(df_pandas)
+
 
 # Load the dataset
 df = pd.read_csv('vehicles_us.csv')
@@ -19,6 +17,13 @@ df['cylinders'] = df['cylinders'].fillna('N/A')
 df['odometer'] = df['odometer'].fillna('N/A')
 df['paint_color'] = df['paint_color'].fillna('N/A')
 df['is_4wd'] = df['is_4wd'].fillna('N/A')
+# Ensure numerical columns have the correct type
+df['odometer'] = pd.to_numeric(df['odometer'], errors='coerce')
+df['price'] = pd.to_numeric(df['price'], errors='coerce')
+
+# Optional: Fill NaN values after coercion if necessary
+df['odometer'] = df['odometer'].fillna(0)
+df['price'] = df['price'].fillna(0)
 
 # Create the Streamlit app
 st.title("Vehicle Listings Analysis")
