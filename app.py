@@ -11,15 +11,21 @@ import pyarrow as pa
 # Load the dataset
 df = pd.read_csv('vehicles_us.csv')
 
-# Check for missing values in the 'price' column
-print(df['price'].isnull().sum())
+# Convert 'price' column to numeric, forcing errors to NaN
+df['price'] = pd.to_numeric(df['price'], errors='coerce')
 
-# Check for non-numeric values in the 'price' column (if any)
-print(df['price'].apply(lambda x: isinstance(x, (int, float))).sum())
+# Handle NaN values in 'price' (optional: you can fill or drop them)
+df['price'] = df['price'].fillna(0)  # Or use df.dropna(subset=['price']) to remove rows
 
-df_arrow = pa.Table.from_pandas(df)
-df_pandas = df_arrow.to_pandas()
-st.write(df_pandas)
+# Ensure 'price' column is of type float64
+df['price'] = df['price'].astype('float64')
+
+# Convert the cleaned DataFrame to a PyArrow Table
+try:
+    df_arrow = pa.Table.from_pandas(df)
+    print("Conversion successful!")
+except Exception as e:
+    print("Error during conversion:", e)
 
 
 
