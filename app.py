@@ -26,6 +26,9 @@ df['model_year'] = pd.to_numeric(df['price'], errors='coerce')
 df['odometer'] = df['odometer'].fillna(0)
 df['price'] = df['price'].fillna(0)
 df['model_year'] = df['model_year'].fillna(0)
+
+
+
 # Create the Streamlit app
 st.title("Vehicle Listings Analysis")
 
