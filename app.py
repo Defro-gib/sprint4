@@ -10,6 +10,13 @@ import pyarrow as pa
 
 # Load the dataset
 df = pd.read_csv('vehicles_us.csv')
+
+# Check for missing values in the 'price' column
+print(df['price'].isnull().sum())
+
+# Check for non-numeric values in the 'price' column (if any)
+print(df['price'].apply(lambda x: isinstance(x, (int, float))).sum())
+
 df_arrow = pa.Table.from_pandas(df)
 df_pandas = df_arrow.to_pandas()
 st.write(df_pandas)
