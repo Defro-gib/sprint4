@@ -1,33 +1,14 @@
-# Import necessary libraries
 import streamlit as st
 import pandas as pd
 import plotly.express as px
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
-import pyarrow as pa
-
-
 
 # Load the dataset
 df = pd.read_csv('vehicles_us.csv')
 
-# Clean missing values
-
-df['cylinders'] = df['cylinders'].fillna('N/A')
-df['odometer'] = df['odometer'].fillna('N/A')
-df['paint_color'] = df['paint_color'].fillna('N/A')
-df['is_4wd'] = df['is_4wd'].fillna('N/A')
-# Ensure numerical columns have the correct type
-df['odometer'] = pd.to_numeric(df['odometer'], errors='coerce')
-df['price'] = pd.to_numeric(df['price'], errors='coerce')
-df['model_year'] = pd.to_numeric(df['price'], errors='coerce')
-
-# Optional: Fill NaN values after coercion if necessary
-df['odometer'] = df['odometer'].fillna(0)
-df['price'] = df['price'].fillna(0)
-df['model_year'] = df['model_year'].fillna(0)
-
-
+# Convert 'date_posted' to datetime format (if necessary)
+df['date_posted'] = pd.to_datetime(df['date_posted'], errors='coerce')
 
 # Create the Streamlit app
 st.title("Vehicle Listings Analysis")
