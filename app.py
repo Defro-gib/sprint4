@@ -21,7 +21,8 @@ df['odometer'] = pd.to_numeric(df['odometer'], errors='coerce').fillna(0)
 df['model_year'] = df['model_year'].fillna('N/A')
 df['paint_color'] = df['paint_color'].fillna('N/A')
 df['is_4wd'] = df['is_4wd'].fillna('N/A')
-
+df = df[df['model_year'] != 'N/A']
+df['model_year'] = pd.to_numeric(df['model_year'], errors='coerce')
 # Convert date_posted to datetime
 df['date_posted'] = pd.to_datetime(df['date_posted'], errors='coerce')
 
