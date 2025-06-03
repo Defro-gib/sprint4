@@ -3,13 +3,26 @@ import pandas as pd
 import plotly.express as px
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
-
 import pyarrow as pa
 
 
 
 # Load the dataset
 df = pd.read_csv('vehicles_us.csv')
+
+duplicated_rows = df[df.duplicated()]
+print(f"Number of duplicate rows: {duplicated_rows.shape[0]}")
+df.drop_duplicates(inplace=True)
+
+print("Missing cylinders before:", df['cylinders'].isna().sum())
+
+# Impute missing 'cylinders' using the median per model and year
+df['cylinders'] = df.groupby(['model', 'year'])['cylinders'].transform(
+    lambda x: x.fillna(x.median())
+)
+
+# Check again
+print("Missing cylinders after:", df['cylinders'].isna().sum())
 
 # Convert 'price' column to numeric, forcing errors to NaN
 df['price'] = pd.to_numeric(df['price'], errors='coerce')
