@@ -43,3 +43,6 @@ Plotly Express – Creating interactive and visually appealing charts
 
 Jupyter Notebook – Performing EDA and data preprocessing
 URL link: https://sprint4-b3k3.onrender.com/
+
+Conclusion
+This project successfully demonstrates how exploratory data analysis (EDA) and interactive visualization can provide valuable insights into used vehicle listings. Through the use of a Streamlit web app, users can explore listing trends, vehicle characteristics, and distribution patterns. Missing values were handled thoughtfully, including an imputation technique using grouped medians for cylinders. The tool is practical, extensible, and sets the foundation for future enhancements such as predictive modeling or deeper market analysis.
