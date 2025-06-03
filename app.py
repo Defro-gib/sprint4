@@ -11,7 +11,7 @@ df = pd.read_csv('vehicles_us.csv')
 df.drop_duplicates(inplace=True)
 
 # Impute missing 'cylinders' using median grouped by model and year
-df['cylinders'] = df.groupby(['model', 'year'])['cylinders'].transform(
+df['cylinders'] = df.groupby(['model', 'model_year'])['cylinders'].transform(
     lambda x: x.fillna(x.median())
 )
 
